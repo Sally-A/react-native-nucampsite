@@ -1,0 +1,1 @@
+export const baseUrl = '192.168.11.196:3001/';
