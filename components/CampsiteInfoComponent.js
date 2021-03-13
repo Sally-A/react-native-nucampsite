@@ -3,7 +3,7 @@ import { Text, View, ScrollView, FlatList, Modal, Button, StyleSheet } from 'rea
 import { Card, Icon, Rating, Input } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { baseUrl } from '../shared/baseUrl';
-import { postFavorite } from '../redux/ActionCreators';
+import { postFavorite, postComment } from '../redux/ActionCreators';
 
 const mapStateToProps = state => {
     return {
@@ -14,7 +14,8 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = {
-    postFavorite: campsiteId => (postFavorite(campsiteId))
+    postFavorite: campsiteId => (postFavorite(campsiteId)),
+    postComment: (campsiteId, rating, author, text) => (postComment(campsiteId, rating, author, text))
 };
 
 function RenderCampsite(props) {
@@ -80,7 +81,7 @@ function RenderComments({comments}) {
                 keyExtractor={item => item.id.toString()}
             />
         </Card>
-    );
+    )
 }
 
 class CampsiteInfo extends Component {
@@ -96,13 +97,13 @@ class CampsiteInfo extends Component {
         };
     }
 
-    toggleModal=() => this.setState({showModal: !this.state.showModal});    
+    toggleModal=() => this.setState({showModal: !this.state.showModal});
 
     handleComment(campsiteId) {
-        //this.props.postComment(campsiteId, this.state.rating, this.state.author, this.state.text);
-        console.log(JSON.stringify(this.state));
+        this.props.postComment(campsiteId, this.state.rating, this.state.author, this.state.text);
         this.toggleModal();
     }
+
     resetForm() {    
         this.setState({
             showModal: false,
@@ -111,7 +112,7 @@ class CampsiteInfo extends Component {
             text: ''
         });
     }
-
+    
     markFavorite(campsiteId) {
         this.props.postFavorite(campsiteId);
     }
@@ -142,6 +143,7 @@ class CampsiteInfo extends Component {
                         <Rating 
                             showRating
                             startingValue={this.state.rating}
+
                             imageSize={40}
                             onFinishRating={rating => this.setState({rating: rating})}
                             style={{paddingVertical: 10}}
@@ -175,7 +177,7 @@ class CampsiteInfo extends Component {
                             <Button
                                 onPress={() => {
                                     this.toggleModal();
-                                    this.resetForm();                                    
+                                    this.resetForm();
                                 }}
                                 color='#808080'
                                 title='Cancel'
