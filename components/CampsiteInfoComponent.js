@@ -189,6 +189,7 @@ class CampsiteInfo extends Component {
             </ScrollView>
         );
     }
+
 }
 
 const styles = StyleSheet.create({
