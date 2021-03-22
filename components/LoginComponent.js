@@ -285,14 +285,14 @@ const styles = StyleSheet.create({
         marginRight: 10
     },
     formInput: {
-        padding: 8
+        padding: 4
     },
     formCheckbox: {
-        margin: 8,
+        margin: 4,
         backgroundColor: null
     },
     formButton: {
-        margin: 20,
+        margin: 10,
         marginRight: 40,
         marginLeft: 40
     },
@@ -301,7 +301,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-evenly',
-        margin: 10
+        margin: 6
     },
     image: {
         width: 60,
